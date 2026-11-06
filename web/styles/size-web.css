@@ -1,0 +1,43 @@
+/* เมนู "ภาพแสดงขนาดป้าย" ของเว็บแอป — ใช้สไตล์ของโปรแกรม Windows (app.css) แล้วปรับให้เหมาะกับคอมพิวเตอร์ แท็บเล็ต และโทรศัพท์ */
+
+.w-size { min-height: 100%; height: auto; }
+/* แถบหัวติดด้านบน: เลื่อนไปที่ส่วนใด ๆ แล้วไม่ถูกแถบหัวบัง */
+html { scroll-padding-top: 72px; }
+.w-size-top {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px; padding-top: max(8px, env(safe-area-inset-top));
+  background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.w-size-title { font-size: 17px; font-weight: 700; }
+.w-size-back { text-decoration: none; color: var(--text-2); }
+.w-size-page { padding: 20px 24px 48px; padding-bottom: max(48px, env(safe-area-inset-bottom)); }
+.w-size .m-loading { padding: 40px 0; text-align: center; color: var(--muted); }
+
+/* ไม่มีแถบด้านซ้ายเหมือนโปรแกรม — ใช้ความกว้างเต็มจอ */
+.w-size .sd-page { max-width: 1320px; }
+
+/* แท็บเล็ตแนวตั้งและโทรศัพท์ */
+@media (max-width: 700px) {
+  .w-size-page { padding: 14px 16px 40px; }
+  .w-size .qs-title { font-size: 22px; }
+  .w-size .sd-inputs { grid-template-columns: 1fr; }
+  .w-size .toasts { left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
+  .w-size .sd-job { flex-wrap: wrap; }
+  /* โทรศัพท์: ขั้นตอน 1–5 เป็นแถวเดียวเลื่อนด้านข้างได้ — ปุ่มอัปโหลดภาพขึ้นมาใกล้จอแรก */
+  .w-size .sd-steps { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-bottom: 8px; padding-bottom: 2px; }
+  .w-size .sd-steps::-webkit-scrollbar { display: none; }
+  .w-size .sd-step-pill { flex: none; font-size: 13px; padding: 4px 12px 4px 4px; gap: 6px; }
+  .w-size .sd-step-no { width: 24px; height: 24px; }
+  .w-size .sd-legend { flex-direction: row; gap: 4px 12px; margin-bottom: 10px; }
+}
+
+/* จอสัมผัส: ปุ่มและช่องกรอกใหญ่พอสำหรับนิ้ว · ตัวอักษรช่องกรอก 16px (iPhone ไม่ซูมหน้าเอง) */
+@media (pointer: coarse) {
+  .w-size .btn, .w-size .segmented button, .w-size .chip, .w-size .link-btn, .w-size .sd-trial > summary { min-height: 44px; }
+  .w-size .btn-icon { min-width: 44px; }
+  .w-size .input, .w-size .select, .w-size input, .w-size select { min-height: 44px; font-size: 16px; }
+  .w-size .check { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+  .w-size .check input[type='checkbox'] { min-height: 0; width: 22px; height: 22px; }
+  .w-size .sd-item-head { min-height: 44px; }
+}

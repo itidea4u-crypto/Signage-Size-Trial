@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- เหมือนหน้าแรก: ไม่โหลดหรือส่งข้อมูลไปเว็บอื่น — ภาพและขนาดอยู่ในเครื่องนี้เท่านั้น -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#5b4cf5" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>ภาพแสดงขนาดป้าย — IdeaForYou</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <script src="js/theme-early.js"></script>
+    <link rel="stylesheet" href="../src/renderer/styles/fonts.css" />
+    <link rel="stylesheet" href="../src/renderer/styles/app.css" />
+    <link rel="stylesheet" href="styles/size-web.css" />
+  </head>
+  <body class="w-size">
+    <header class="w-size-top">
+      <div class="w-size-title">ภาพแสดงขนาดป้าย</div>
+    </header>
+    <main class="w-size-page" id="size-root"><div class="m-loading">กำลังเปิด…</div></main>
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+    <div id="modal-root"></div>
+    <script src="js/load-check.js"></script>
+    <script type="module" src="js/size-main.js"></script>
+  </body>
+</html>
