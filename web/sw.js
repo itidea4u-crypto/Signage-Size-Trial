@@ -1,7 +1,7 @@
 // service worker ของเวอร์ชันมือถือ: เก็บไฟล์ของแอปไว้ในเครื่อง เพื่อเปิดใช้ได้แม้ไม่มีอินเทอร์เน็ต
 // ไม่เก็บหรือส่งข้อมูลลูกค้า (ข้อมูลงานอยู่ใน IndexedDB) — scripts/build-web.mjs ใส่ชื่อชุดไฟล์และรายการไฟล์ให้ตอนสร้าง
 
-const CACHE = "ify-mobile-660234e5e11f";
+const CACHE = "ify-mobile-660dbdad7705";
 const FILES = [
   "./",
   "../src/renderer/assets/fonts/OFL-LICENSE.txt",
