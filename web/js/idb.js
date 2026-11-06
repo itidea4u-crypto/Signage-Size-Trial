@@ -2,9 +2,10 @@
 // - projects: งานแต่ละชิ้น (รวมภาพอ้างอิงแบบ data URL)
 // - kv: การตั้งค่าและสถานะเล็ก ๆ เช่น งานที่เปิดค้างไว้
 // - dimensionJobs: งาน "ภาพแสดงขนาดป้าย" (ภาพต้นฉบับ ขนาด กรอบวัด) — เพิ่มในรุ่นที่ 2 ของที่เก็บข้อมูล
+// - trash / backups: ถังขยะโครงการ และไฟล์สำรองในเบราว์เซอร์ ของเว็บ AI Design Studio (web/js/studio-api.js) — เพิ่มในรุ่นที่ 3
 
 const DB_NAME = 'ideaforyou-mobile';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 function promisify(req) {
   return new Promise((resolve, reject) => {
@@ -22,6 +23,9 @@ function openDb() {
       if (!db.objectStoreNames.contains('kv')) db.createObjectStore('kv');
       // รุ่นที่ 2: เพิ่มที่เก็บใหม่เท่านั้น — งานและการตั้งค่าเดิมไม่ถูกแตะ
       if (!db.objectStoreNames.contains('dimensionJobs')) db.createObjectStore('dimensionJobs', { keyPath: 'id' });
+      // รุ่นที่ 3: เพิ่มที่เก็บใหม่เท่านั้น
+      if (!db.objectStoreNames.contains('trash')) db.createObjectStore('trash', { keyPath: 'id' });
+      if (!db.objectStoreNames.contains('backups')) db.createObjectStore('backups', { keyPath: 'key' });
     };
     req.onsuccess = () => {
       const db = req.result;
@@ -61,5 +65,13 @@ export function idbBackend() {
     getDimensionJob: (id) => run('dimensionJobs', 'readonly', (s) => s.get(id)),
     putDimensionJob: (job) => run('dimensionJobs', 'readwrite', (s) => s.put(job)),
     deleteDimensionJob: (id) => run('dimensionJobs', 'readwrite', (s) => s.delete(id)),
+    allTrash: () => run('trash', 'readonly', (s) => s.getAll()),
+    getTrash: (id) => run('trash', 'readonly', (s) => s.get(id)),
+    putTrash: (p) => run('trash', 'readwrite', (s) => s.put(p)),
+    deleteTrash: (id) => run('trash', 'readwrite', (s) => s.delete(id)),
+    allBackups: () => run('backups', 'readonly', (s) => s.getAll()),
+    getBackup: (key) => run('backups', 'readonly', (s) => s.get(key)),
+    putBackup: (b) => run('backups', 'readwrite', (s) => s.put(b)),
+    deleteBackup: (key) => run('backups', 'readwrite', (s) => s.delete(key)),
   };
 }

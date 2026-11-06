@@ -1,7 +1,7 @@
 // service worker ของเวอร์ชันมือถือ: เก็บไฟล์ของแอปไว้ในเครื่อง เพื่อเปิดใช้ได้แม้ไม่มีอินเทอร์เน็ต
 // ไม่เก็บหรือส่งข้อมูลลูกค้า (ข้อมูลงานอยู่ใน IndexedDB) — scripts/build-web.mjs ใส่ชื่อชุดไฟล์และรายการไฟล์ให้ตอนสร้าง
 
-const CACHE = "ify-mobile-f0b29176f4b7";
+const CACHE = "ify-mobile-660234e5e11f";
 const FILES = [
   "./",
   "../src/renderer/assets/fonts/OFL-LICENSE.txt",
@@ -17,6 +17,7 @@ const FILES = [
   "../src/renderer/assets/fonts/ibm-plex-sans-thai-thai-500-normal.woff2",
   "../src/renderer/assets/fonts/ibm-plex-sans-thai-thai-600-normal.woff2",
   "../src/renderer/assets/fonts/ibm-plex-sans-thai-thai-700-normal.woff2",
+  "../src/renderer/assets/logo.svg",
   "../src/renderer/js/dom.js",
   "../src/renderer/js/pages/sign-dimensions.js",
   "../src/renderer/js/sign-canvas.js",
@@ -44,11 +45,16 @@ const FILES = [
   "./js/size-api.js",
   "./js/size-boot.js",
   "./js/size-main.js",
+  "./js/studio-loader.js",
   "./js/theme-early.js",
+  "./js/vault.js",
   "./js/version.js",
   "./manifest.webmanifest",
   "./size.html",
-  "./styles/size-web.css"
+  "./studio.enc",
+  "./studio.html",
+  "./styles/size-web.css",
+  "./styles/studio-web.css"
 ];
 
 self.addEventListener('install', (event) => {

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- ไม่โหลดหรือส่งข้อมูลไปเว็บอื่น · blob: = โมดูลของแอปที่ถอดรหัสในเครื่องหลังกรอกรหัสผ่าน (web/js/studio-loader.js) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob:; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#5b4cf5" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>IdeaForYou AI Design Studio</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <script src="js/theme-early.js"></script>
+    <link rel="stylesheet" href="../src/renderer/styles/fonts.css" />
+    <link rel="stylesheet" href="../src/renderer/styles/app.css" />
+    <link rel="stylesheet" href="styles/studio-web.css" />
+  </head>
+  <body class="w-studio" data-vault="locked">
+    <!-- หน้าใส่รหัสผ่าน: ความสามารถที่ใช้ Prompt / Workflow / Skill เปิดได้หลังปลดล็อกเท่านั้น -->
+    <div class="vault" id="vault" data-testid="vault">
+      <form class="vault-card" id="vault-form" autocomplete="off" novalidate>
+        <div class="brand vault-brand">
+          <img src="../src/renderer/assets/logo.svg" alt="" class="brand-logo" />
+          <div>
+            <div class="brand-name">IdeaForYou</div>
+            <div class="brand-sub">AI Design Studio</div>
+          </div>
+        </div>
+        <h1 class="vault-title">สำหรับพนักงาน</h1>
+        <p class="vault-text">กรอกรหัสผ่านของบริษัทเพื่อเปิดระบบสร้าง Prompt, Workflow และ Skill</p>
+        <label class="field">
+          <span class="field-label">รหัสผ่าน</span>
+          <input class="input" id="vault-password" data-testid="vault-password" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" />
+        </label>
+        <label class="check vault-remember">
+          <input type="checkbox" id="vault-remember" data-testid="vault-remember" checked />
+          <span>จำบนเครื่องนี้ (ไม่เก็บรหัสผ่าน — เก็บเฉพาะกุญแจที่ดึงออกไม่ได้)</span>
+        </label>
+        <div class="vault-msg" id="vault-msg" data-testid="vault-msg" role="status" aria-live="polite"></div>
+        <button class="btn btn-primary vault-go" id="vault-go" data-action="vault-unlock" type="submit">ปลดล็อก</button>
+        <a class="vault-size" href="size.html" data-action="open-size-only">ใช้เฉพาะ "ภาพแสดงขนาดป้าย" (ไม่ต้องใช้รหัสผ่าน) →</a>
+      </form>
+    </div>
+
+    <!-- โครงหน้าจอเดียวกับโปรแกรม Windows (src/renderer/index.html) -->
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../src/renderer/assets/logo.svg" alt="" class="brand-logo" />
+          <div>
+            <div class="brand-name">IdeaForYou</div>
+            <div class="brand-sub">AI Design Studio</div>
+          </div>
+        </div>
+        <nav class="nav" id="nav" aria-label="เมนูหลัก"></nav>
+        <button class="btn btn-ghost btn-sm vault-lock" id="vault-lock" data-action="vault-lock" type="button" title="ล็อกเครื่องนี้ (ต้องกรอกรหัสผ่านใหม่)">ล็อก</button>
+        <div class="sidebar-foot">
+          <div class="sidebar-company" id="sidebar-company"></div>
+          <div class="sidebar-version" id="sidebar-version"></div>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar" id="topbar"></header>
+        <section class="page" id="page"></section>
+      </main>
+    </div>
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+    <div id="modal-root"></div>
+    <script src="js/vault.js"></script>
+    <script src="js/studio-loader.js"></script>
+  </body>
+</html>

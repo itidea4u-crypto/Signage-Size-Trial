@@ -1,0 +1,91 @@
+/* เว็บ IdeaForYou AI Design Studio: หน้าใส่รหัสผ่าน + ปรับหน้าจอโปรแกรม Windows (app.css) ให้ใช้บนโทรศัพท์/แท็บเล็ตได้
+   ไม่แก้ app.css ของโปรแกรม Windows — กฎทั้งหมดอยู่ในไฟล์นี้ และมีผลเฉพาะหน้า web/studio.html */
+
+/* ---------- หน้าใส่รหัสผ่าน ---------- */
+.w-studio[data-vault='locked'] .shell { display: none; }
+.w-studio[data-vault='open'] .vault { display: none; }
+.vault {
+  min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center;
+  padding: max(20px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom));
+  background: var(--bg);
+}
+.vault-card {
+  width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 14px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+.vault-brand { padding: 0; }
+.vault-title { font-size: 20px; margin: 4px 0 0; }
+.vault-text { margin: 0; color: var(--text-2); }
+.vault-card .input { font-size: 16px; } /* 16px: iPhone ไม่ซูมหน้าเมื่อแตะช่องกรอก */
+.vault-remember { align-items: flex-start; font-size: 14px; color: var(--text-2); }
+.vault-msg { min-height: 1.4em; font-size: 14px; }
+.vault-msg.error { color: var(--danger, #b42318); font-weight: 600; }
+.vault-go { min-height: 46px; justify-content: center; font-size: 16px; }
+.vault-size { font-size: 14px; color: var(--brand); text-decoration: none; text-align: center; padding: 8px 0; }
+.vault-lock { margin: 8px 8px 0; justify-content: flex-start; color: var(--text-2); }
+
+/* ---------- จอแคบ: แท็บเล็ตแนวตั้ง / โทรศัพท์ ---------- */
+@media (max-width: 860px) {
+  .shell { display: block; height: auto; min-height: 100vh; }
+  .main { height: auto; min-height: 100vh; padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .page { overflow: visible; padding: 16px 16px 32px; }
+  /* เมนูหลักเป็นแถบล่าง (เหมือนแอปโทรศัพท์) */
+  .sidebar {
+    position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; top: auto; height: auto; width: auto;
+    flex-direction: row; align-items: stretch; gap: 0; padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+    border-right: 0; border-top: 1px solid var(--border); overflow: visible;
+  }
+  .sidebar .brand, .sidebar-foot { display: none; }
+  .nav { flex-direction: row; flex: 1; gap: 2px; }
+  .nav-item {
+    flex: 1 1 0; min-width: 0; flex-direction: column; justify-content: center; gap: 2px;
+    padding: 6px 2px; min-height: 52px; text-align: center;
+  }
+  .nav-item svg { width: 22px; height: 22px; }
+  .nav-text { min-width: 0; }
+  /* ชื่อเมนูยาว (ภาพแสดงขนาดป้าย) ขึ้นบรรทัดใหม่ได้ ไม่เกิน 2 บรรทัด */
+  .nav-label {
+    font-size: 11px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; overflow-wrap: anywhere; font-weight: 600;
+  }
+  .nav-hint { display: none; }
+  .vault-lock { margin: 0; flex: 0 0 auto; padding: 6px 8px; font-size: 12px; min-height: 52px; }
+  /* แถบบน (ติดขอบบน): ชื่อโครงการเต็มแถว แล้วสถานะ + ปุ่มในแถวเดียว */
+  .topbar { position: sticky; top: 0; z-index: 30; flex-wrap: wrap; min-height: 0; gap: 6px 8px; padding: 8px 12px; padding-top: max(8px, env(safe-area-inset-top)); }
+  .project-name-input { flex: 1 1 100%; max-width: none; min-width: 0; font-size: 16px; padding: 4px 6px; }
+  .topbar .select { width: auto !important; flex: 1 1 110px; min-width: 0; font-size: 16px; }
+  .topbar-spacer, .topbar-sep { display: none; }
+  .topbar .btn { min-height: 40px; padding: 6px 10px; }
+  .topbar [data-testid='save-state'] { order: 10; flex: 1 1 100%; font-size: 12px; }
+  .topbar-sub { display: none; }
+  /* แท็บ (ตั้งค่า/คลังโครงการ): เลื่อนซ้าย-ขวา ไม่ตัดคำ */
+  .tabs { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { white-space: nowrap; flex: 0 0 auto; padding: 10px 12px; }
+  /* ตารางและกริดหลายคอลัมน์ → คอลัมน์เดียว */
+  .qs-grid, .grid.g2, .grid.g3, .grid.g4, .skill-grid, .size-facts { grid-template-columns: minmax(0, 1fr) !important; }
+  .table { display: block; overflow-x: auto; }
+  .path-row { flex-wrap: wrap; }
+  .path-value { min-width: 0; overflow-wrap: anywhere; }
+  .input, .select, textarea { font-size: 16px; }
+  .modal { max-width: calc(100vw - 24px); }
+  .toasts { bottom: calc(76px + env(safe-area-inset-bottom)); }
+}
+
+/* โทรศัพท์: ปุ่ม "โครงการใหม่" บนแถบบนเหลือเฉพาะไอคอน (ชื่อปุ่มยังอ่านได้ด้วยโปรแกรมอ่านหน้าจอ) */
+@media (max-width: 480px) {
+  /* ขั้นตอน 1–3 ของเริ่มด่วน: ย่อให้พอดีจอ 320 px (iPhone SE) */
+  .steps { gap: 2px; }
+  .step { min-width: 0; flex: 1 1 0; gap: 4px; padding: 4px 6px 4px 4px; font-size: 11.5px; line-height: 1.25; }
+  .step + .step::before { display: none; }
+  .step-dot { flex: none; width: 20px; height: 20px; }
+  .topbar [data-action='topbar-new'] { font-size: 0; gap: 0; }
+  .topbar [data-action='topbar-new'] svg { width: 20px; height: 20px; }
+}
+
+/* นิ้วสัมผัส: ปุ่มและช่องเลือกใหญ่พอแตะ */
+@media (pointer: coarse) {
+  .btn { min-height: 40px; }
+  .check input[type='checkbox'], .check input[type='radio'] { width: 20px; height: 20px; }
+}
